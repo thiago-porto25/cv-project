@@ -14,6 +14,9 @@ export default function DocPreview(props) {
       <Text>{currentCv.email}</Text>
       <Text>{currentCv.gitHub}</Text>
       <Text>{currentCv.linkedIn}</Text>
+      <Line />
     </Container>
   )
 }
+
+//tentar usar indexOf(currentCv) em data para poder salvar mudancas

@@ -12,12 +12,8 @@ const DownloadButton = styled.button``
 const NoCv = styled.h1``
 
 export default function Preview(props) {
-  const { data, setData } = useContext(DataContext)
+  const { setData } = useContext(DataContext)
 
-  useEffect(() => {
-    console.log(data)
-    console.log(props.currentCv)
-  })
   return (
     <PreviewBg>
       <Header {...props} />
