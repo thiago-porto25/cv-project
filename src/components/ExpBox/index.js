@@ -5,7 +5,7 @@ import { Container, Input, Label, Textarea } from './styles/ExpBox'
 export default function Box(props) {
   useEffect(() => {
     return () =>
-      props.setData({
+      props.setInfo({
         company: '',
         position: '',
         description: '',
@@ -21,9 +21,9 @@ export default function Box(props) {
         <Input
           type="text"
           maxLength="30"
-          value={props.data.company}
+          value={props.info.company}
           onChange={({ target }) =>
-            props.setData({ ...props.data, company: target.value })
+            props.setInfo({ ...props.info, company: target.value })
           }
           required
         />
@@ -32,9 +32,9 @@ export default function Box(props) {
         <Input
           type="text"
           maxLength="30"
-          value={props.data.position}
+          value={props.info.position}
           onChange={({ target }) =>
-            props.setData({ ...props.data, position: target.value })
+            props.setInfo({ ...props.info, position: target.value })
           }
           required
         />
@@ -43,9 +43,9 @@ export default function Box(props) {
         <Textarea
           type="text"
           maxLength="30"
-          value={props.data.description}
+          value={props.info.description}
           onChange={({ target }) =>
-            props.setData({ ...props.data, description: target.value })
+            props.setInfo({ ...props.info, description: target.value })
           }
           required
         />
@@ -54,9 +54,9 @@ export default function Box(props) {
         <Label>Start date:</Label>
         <Input
           type="date"
-          value={props.data.start}
+          value={props.info.start}
           onChange={({ target }) =>
-            props.setData({ ...props.data, start: target.value })
+            props.setInfo({ ...props.info, start: target.value })
           }
           required
         />
@@ -64,9 +64,9 @@ export default function Box(props) {
         <Label>End date:</Label>
         <Input
           type="date"
-          value={props.data.end}
+          value={props.info.end}
           onChange={({ target }) =>
-            props.setData({ ...props.data, end: target.value })
+            props.setInfo({ ...props.info, end: target.value })
           }
         />
       </div>

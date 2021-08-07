@@ -14,25 +14,25 @@ import {
 
 export default function Education(props) {
   const [count, setCount] = useState(0)
-  const [data1, setData1] = useState({
+  const [info1, setInfo1] = useState({
     institution: '',
     degree: '',
     start: '',
     end: '',
   })
-  const [data2, setData2] = useState({
+  const [info2, setInfo2] = useState({
     institution: '',
     degree: '',
     start: '',
     end: '',
   })
-  const [data3, setData3] = useState({
+  const [info3, setInfo3] = useState({
     institution: '',
     degree: '',
     start: '',
     end: '',
   })
-  const [data4, setData4] = useState({
+  const [info4, setInfo4] = useState({
     institution: '',
     degree: '',
     start: '',
@@ -53,17 +53,17 @@ export default function Education(props) {
           e.preventDefault()
           props.setInEducation(false)
           props.setInExperience(true)
-          const educData = [data1, data2, data3, data4].filter(
+          const educInfo = [info1, info2, info3, info4].filter(
             (item) => item.institution !== '' && item.degree !== ''
           )
-          props.setCurrentCv({ ...props.currentCv, education: educData })
+          props.setCurrentCv({ ...props.currentCv, education: educInfo })
         }}
       >
         <Frame>
-          <Box data={data1} setData={setData1} />
-          {count >= 1 && <Box data={data2} setData={setData2} />}
-          {count >= 2 && <Box data={data3} setData={setData3} />}
-          {count >= 3 && <Box data={data4} setData={setData4} />}
+          <Box info={info1} setInfo={setInfo1} />
+          {count >= 1 && <Box info={info2} setInfo={setInfo2} />}
+          {count >= 2 && <Box info={info3} setInfo={setInfo3} />}
+          {count >= 3 && <Box info={info4} setInfo={setInfo4} />}
           <RemoveButton
             type="button"
             onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}

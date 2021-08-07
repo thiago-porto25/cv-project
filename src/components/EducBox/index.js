@@ -5,7 +5,7 @@ import { Container, Input, Label } from './styles/EducBox'
 export default function Box(props) {
   useEffect(() => {
     return () =>
-      props.setData({ institution: '', degree: '', start: '', end: '' })
+      props.setInfo({ institution: '', degree: '', start: '', end: '' })
   }, [])
 
   return (
@@ -15,9 +15,9 @@ export default function Box(props) {
         <Input
           type="text"
           maxLength="30"
-          value={props.data.institution}
+          value={props.info.institution}
           onChange={({ target }) =>
-            props.setData({ ...props.data, institution: target.value })
+            props.setInfo({ ...props.info, institution: target.value })
           }
           required
         />
@@ -26,9 +26,9 @@ export default function Box(props) {
         <Input
           type="text"
           maxLength="30"
-          value={props.data.degree}
+          value={props.info.degree}
           onChange={({ target }) =>
-            props.setData({ ...props.data, degree: target.value })
+            props.setInfo({ ...props.info, degree: target.value })
           }
           required
         />
@@ -37,9 +37,9 @@ export default function Box(props) {
         <Label>Start date:</Label>
         <Input
           type="date"
-          value={props.data.start}
+          value={props.info.start}
           onChange={({ target }) =>
-            props.setData({ ...props.data, start: target.value })
+            props.setInfo({ ...props.info, start: target.value })
           }
           required
         />
@@ -47,10 +47,11 @@ export default function Box(props) {
         <Label>End date:</Label>
         <Input
           type="date"
-          value={props.data.end}
+          value={props.info.end}
           onChange={({ target }) =>
-            props.setData({ ...props.data, end: target.value })
+            props.setInfo({ ...props.info, end: target.value })
           }
+          required
         />
       </div>
     </Container>
