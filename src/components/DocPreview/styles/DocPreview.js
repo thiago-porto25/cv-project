@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div``
+export const EditButton = styled.button``
 export const EducFrame = styled.section``
 export const EducInner = styled.div``
 export const ExpFrame = styled.section``
