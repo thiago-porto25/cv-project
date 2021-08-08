@@ -1,17 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
+import clone from 'just-clone'
 import {
   AddSkill,
+  CancelButton,
   Container,
   FinishButton,
   Form,
   Frame,
   Input,
   List,
+  SaveButton,
   Title,
 } from './styles/Skills'
 
 export default function Skills(props) {
+  const [currentCvIndex] = useState(
+    props.whichPage === 'preview'
+      ? props.data.indexOf(props.currentCv)
+      : undefined
+  )
   const [newSkill, setNewSkill] = useState('')
   const [skillsList, setSkillsList] = useState([])
 
@@ -22,19 +30,22 @@ export default function Skills(props) {
   }
 
   useEffect(() => {
-    props.setProgress(4)
-    return () => {
-      setNewSkill('')
-      setSkillsList([])
-    }
-  }, [])
-
-  useEffect(() => {
-    if (props.currentCv.skills !== undefined) {
-      console.log('test')
+    if (
+      props.whichPage === 'creating' &&
+      props.currentCv.skills !== undefined
+    ) {
       if (props.data === undefined) {
         props.setData([props.currentCv])
       } else props.setData([...props.data, props.currentCv])
+    }
+    if (props.whichPage === 'preview') {
+      const dataClone = clone(props.data)
+      const newData = dataClone.map((item, i) => {
+        if (currentCvIndex === i) {
+          return props.currentCv
+        } else return item
+      })
+      props.setData(newData)
     }
   }, [props.currentCv])
 
@@ -44,6 +55,15 @@ export default function Skills(props) {
     }
   }, [props.data])
 
+  useEffect(() => {
+    if (props.whichPage === 'creating') props.setProgress(4)
+    if (props.whichPage === 'preview') setSkillsList(props.currentCv.skills)
+    return () => {
+      setNewSkill('')
+      setSkillsList([])
+    }
+  }, [])
+
   return (
     <Container>
       <Title>Skills</Title>
@@ -51,11 +71,15 @@ export default function Skills(props) {
         onSubmit={(e) => {
           e.preventDefault()
           props.setCurrentCv({ ...props.currentCv, skills: skillsList })
-          setTimeout(() => {
-            props.setInSkills(false)
-            props.setInCreating(false)
-            props.setInPreview(true)
-          }, 500)
+
+          if (props.whichPage === 'creating') {
+            setTimeout(() => {
+              props.setInSkills(false)
+              props.setInCreating(false)
+              props.setInPreview(true)
+            }, 500)
+          }
+          if (props.whichPage === 'preview') props.setIsEditingSkills(false)
         }}
       >
         <Frame>
@@ -85,7 +109,16 @@ export default function Skills(props) {
             </li>
           ))}
         </List>
-        <FinishButton type="submit">Finish CV</FinishButton>
+        {props.whichPage === 'preview' ? (
+          <>
+            <CancelButton onClick={() => props.setIsEditingSkills(false)}>
+              Cancel
+            </CancelButton>
+            <SaveButton type="submit">Save</SaveButton>
+          </>
+        ) : (
+          <FinishButton type="submit">Finish CV</FinishButton>
+        )}
       </Form>
     </Container>
   )

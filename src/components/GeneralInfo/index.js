@@ -1,16 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
+import clone from 'just-clone'
 import {
+  CancelButton,
   Container,
   Column,
   Form,
   Input,
   Label,
+  SaveButton,
   SelectGender,
   NextButton,
   Title,
 } from './styles/GeneralInfo'
 
 export default function GeneralInfo(props) {
+  const [currentCvIndex] = useState(
+    props.whichPage === 'preview'
+      ? props.data.indexOf(props.currentCv)
+      : undefined
+  )
+  /////checar cvindex
+
   const [Cv, setCv] = useState({
     fullName: '',
     age: '',
@@ -29,7 +40,37 @@ export default function GeneralInfo(props) {
   ]
 
   useEffect(() => {
-    props.setProgress(1)
+    if (props.whichPage === 'preview') {
+      const dataClone = clone(props.data)
+      const newData = dataClone.map((item, i) => {
+        if (currentCvIndex === i) {
+          return props.currentCv
+        } else return item
+      })
+      props.setData(newData)
+    }
+  }, [props.currentCv])
+
+  useEffect(() => {
+    if (props.whichPage === 'preview' && props.data !== undefined) {
+      localStorage.clear()
+      localStorage.setItem('data', JSON.stringify(props.data))
+    }
+  }, [props.data])
+
+  useEffect(() => {
+    if (props.whichPage === 'creating') props.setProgress(1)
+    if (props.whichPage === 'preview')
+      setCv({
+        fullName: props.currentCv.fullName,
+        age: props.currentCv.age,
+        gender: props.currentCv.gender,
+        location: props.currentCv.location,
+        email: props.currentCv.email,
+        phone: props.currentCv.phone,
+        gitHub: props.currentCv.gitHub,
+        linkedIn: props.currentCv.linkedIn,
+      })
     return () => {
       setCv({
         fullName: '',
@@ -42,7 +83,6 @@ export default function GeneralInfo(props) {
         linkedIn: '',
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -52,9 +92,27 @@ export default function GeneralInfo(props) {
         method="POST"
         onSubmit={(e) => {
           e.preventDefault()
-          props.setInGeneralInfo(false)
-          props.setInEducation(true)
-          props.setCurrentCv(Cv)
+
+          if (props.whichPage === 'creating') {
+            props.setInGeneralInfo(false)
+            props.setInEducation(true)
+            props.setCurrentCv(Cv)
+          }
+
+          if (props.whichPage === 'preview') {
+            props.setCurrentCv({
+              ...props.currentCv,
+              fullName: Cv.fullName,
+              age: Cv.age,
+              gender: Cv.gender,
+              location: Cv.location,
+              email: Cv.email,
+              phone: Cv.phone,
+              gitHub: Cv.gitHub,
+              linkedIn: Cv.linkedIn,
+            })
+            props.setIsEditingInfo(false)
+          }
         }}
       >
         <Column>
@@ -141,7 +199,16 @@ export default function GeneralInfo(props) {
             onChange={({ target }) => setCv({ ...Cv, linkedIn: target.value })}
           />
         </Column>
-        <NextButton type="submit">Next</NextButton>
+        {props.whichPage === 'preview' ? (
+          <>
+            <CancelButton onClick={() => props.setIsEditingInfo(false)}>
+              Cancel
+            </CancelButton>
+            <SaveButton type="submit">Save</SaveButton>
+          </>
+        ) : (
+          <NextButton type="submit">Next</NextButton>
+        )}
       </Form>
     </Container>
   )

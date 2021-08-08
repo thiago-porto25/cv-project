@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Header, Footer, DocPreview } from '../components'
 import DataContext from '../context/DataContext'
@@ -12,7 +12,7 @@ const DownloadButton = styled.button``
 const NoCv = styled.h1``
 
 export default function Preview(props) {
-  const { setData } = useContext(DataContext)
+  const { setData, data } = useContext(DataContext)
 
   return (
     <PreviewBg>
@@ -22,6 +22,7 @@ export default function Preview(props) {
           <DocPreview
             currentCv={props.currentCv}
             setCurrentCv={props.setCurrentCv}
+            data={data}
             setData={setData}
           />
         ) : (

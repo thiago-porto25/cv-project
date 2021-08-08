@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import EditInfo from '../EditInfo'
-import EditEduc from '../EditEduc'
-import EditExp from '../EditExp'
-import EditSkills from '../EditSkills'
+import GeneralInfo from '../GeneralInfo'
+import Education from '../Education'
+import Experience from '../Experience'
+import Skills from '../Skills'
 import {
   Container,
   EditButton,
@@ -37,16 +37,19 @@ export default function DocPreview(props) {
     }
   }, [])
 
+  console.log(data)
+
   return (
     <Container>
       <InfoFrame>
         {isEditingInfo ? (
-          <EditInfo
+          <GeneralInfo
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             data={data}
             setData={setData}
             setIsEditingInfo={setIsEditingInfo}
+            whichPage="preview"
           />
         ) : (
           <>
@@ -68,12 +71,13 @@ export default function DocPreview(props) {
       <EducFrame>
         <Title>Education</Title>
         {isEditingEduc ? (
-          <EditEduc
+          <Education
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             data={data}
             setData={setData}
             setIsEditingEduc={setIsEditingEduc}
+            whichPage="preview"
           />
         ) : (
           <>
@@ -96,12 +100,13 @@ export default function DocPreview(props) {
       <ExpFrame>
         <Title>Experience</Title>
         {isEditingExp ? (
-          <EditExp
+          <Experience
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             data={data}
             setData={setData}
             setIsEditingExp={setIsEditingExp}
+            whichPage="preview"
           />
         ) : currentCv.experience === 'none' ? (
           <>
@@ -134,12 +139,13 @@ export default function DocPreview(props) {
       <SkillsFrame>
         <Title>Skills</Title>
         {isEditingSkills ? (
-          <EditSkills
+          <Skills
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             data={data}
             setData={setData}
             setIsEditingSkills={setIsEditingSkills}
+            whichPage="preview"
           />
         ) : (
           <>
@@ -157,5 +163,3 @@ export default function DocPreview(props) {
     </Container>
   )
 }
-
-//tentar usar indexOf(currentCv) em data para poder salvar mudancas

@@ -44,6 +44,7 @@ export default function Creating(props) {
             setInEducation={setInEducation}
             setCurrentCv={setCurrentCv}
             setProgress={setProgress}
+            whichPage="creating"
           />
         )}
         {inEducation && (
@@ -53,6 +54,7 @@ export default function Creating(props) {
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             setProgress={setProgress}
+            whichPage="creating"
           />
         )}
         {inExperience && (
@@ -62,6 +64,7 @@ export default function Creating(props) {
             setCurrentCv={setCurrentCv}
             currentCv={currentCv}
             setProgress={setProgress}
+            whichPage="creating"
           />
         )}
         {inSkills && (
@@ -74,6 +77,7 @@ export default function Creating(props) {
             setInCreating={props.setInCreating}
             setInPreview={props.setInPreview}
             setProgress={setProgress}
+            whichPage="creating"
           />
         )}
       </CreatingContainer>
