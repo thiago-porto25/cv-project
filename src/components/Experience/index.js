@@ -1,4 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/*
+  - Data is not properly saving and the effect hook is also not listening to it in the right way.
+maybe i may need to create a custom hook that listens for changes in data and current CV.
+
+  - encountered a bug where a Cv duplicated itself on top of another.
+
+  - encountered a bug when creating a no experience Cv and then in the preview page clicking on the
+  checkbox to add experience. probably i may have to add state to the checkbox checked attribute.
+*/
 import React, { useState, useEffect } from 'react'
 import clone from 'just-clone'
 import Box from '../ExpBox'
