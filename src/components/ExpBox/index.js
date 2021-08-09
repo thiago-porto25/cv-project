@@ -5,7 +5,6 @@ import { Container, Input, Label, Textarea } from './styles/ExpBox'
 export default function Box(props) {
   useEffect(() => {
     return () => {
-      props.setCount(0)
       props.setInfo({
         company: '',
         position: '',

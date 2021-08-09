@@ -166,19 +166,22 @@ export default function Experience(props) {
             X
           </RemoveButton>
         </Frame>
-        <Label>I have no prior experience</Label>
-        <Checkbox
-          type="checkbox"
-          value={noExp}
-          defaultChecked={noExp}
-          onClick={() => setNoExp((prev) => !prev)}
-        />
         <AddButton
           type="button"
           onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
         >
           +
         </AddButton>
+        <Label>I have no prior experience</Label>
+        <Checkbox
+          type="checkbox"
+          value={noExp}
+          defaultChecked={noExp}
+          onClick={() => {
+            if (!noExp) setCount(0)
+            setNoExp((prev) => !prev)
+          }}
+        />
         {props.whichPage === 'preview' ? (
           <>
             <CancelButton onClick={() => props.setIsEditingExp(false)}>
