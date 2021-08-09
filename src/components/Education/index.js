@@ -16,7 +16,7 @@ import {
 } from './styles/Education'
 
 export default function Education(props) {
-  const [currentCvIndex] = useState(
+  const [currentCvIndex, setCurrentCvIndex] = useState(
     props.whichPage === 'preview'
       ? props.data.indexOf(props.currentCv)
       : undefined
@@ -56,12 +56,8 @@ export default function Education(props) {
   useEffect(() => {
     if (props.whichPage === 'preview') {
       const dataClone = clone(props.data)
-      const newData = dataClone.map((item, i) => {
-        if (currentCvIndex === i) {
-          return props.currentCv
-        } else return item
-      })
-      props.setData(newData)
+      dataClone.splice(currentCvIndex, 1, props.currentCv)
+      props.setData(dataClone)
     }
   }, [props.currentCv])
 
@@ -103,7 +99,10 @@ export default function Education(props) {
 
   useEffect(() => {
     if (props.whichPage === 'creating') props.setProgress(2)
-    return () => setCount(0)
+    return () => {
+      setCount(0)
+      setCurrentCvIndex(undefined)
+    }
   }, [])
 
   return (
@@ -118,9 +117,7 @@ export default function Education(props) {
             props.setInEducation(false)
             props.setInExperience(true)
           }
-          if (props.whichPage === 'preview') {
-            props.setIsEditingEduc(false)
-          }
+          if (props.whichPage === 'preview') props.setIsEditingEduc(false)
 
           const educInfo = [info1, info2, info3, info4].filter(
             (item) => item.institution !== '' && item.degree !== ''

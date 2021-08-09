@@ -40,12 +40,8 @@ export default function Skills(props) {
     }
     if (props.whichPage === 'preview') {
       const dataClone = clone(props.data)
-      const newData = dataClone.map((item, i) => {
-        if (currentCvIndex === i) {
-          return props.currentCv
-        } else return item
-      })
-      props.setData(newData)
+      dataClone.splice(currentCvIndex, 1, props.currentCv)
+      props.setData(dataClone)
     }
   }, [props.currentCv])
 

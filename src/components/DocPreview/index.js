@@ -37,8 +37,6 @@ export default function DocPreview(props) {
     }
   }, [])
 
-  console.log(data)
-
   return (
     <Container>
       <InfoFrame>

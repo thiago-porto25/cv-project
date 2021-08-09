@@ -4,7 +4,8 @@ import { Container, Input, Label, Textarea } from './styles/ExpBox'
 
 export default function Box(props) {
   useEffect(() => {
-    return () =>
+    return () => {
+      props.setCount(0)
       props.setInfo({
         company: '',
         position: '',
@@ -12,6 +13,7 @@ export default function Box(props) {
         start: '',
         end: '',
       })
+    }
   }, [])
 
   return (
