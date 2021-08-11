@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* my theory is when closing the creating component the Cvindex need to be set */
 import React, { useState, useEffect } from 'react'
+import clone from 'just-clone'
 import GeneralInfo from '../GeneralInfo'
 import Education from '../Education'
 import Experience from '../Experience'
@@ -21,11 +23,24 @@ import {
 } from './styles/DocPreview'
 
 export default function DocPreview(props) {
-  const { currentCv, setCurrentCv, data, setData } = props
+  const { currentCvIndex, currentCv, setCurrentCv, data, setData } = props
   const [isEditingInfo, setIsEditingInfo] = useState(false)
   const [isEditingEduc, setIsEditingEduc] = useState(false)
   const [isEditingExp, setIsEditingExp] = useState(false)
   const [isEditingSkills, setIsEditingSkills] = useState(false)
+
+  useEffect(() => {
+    if (data[currentCvIndex] === currentCv) return
+    const dataClone = clone(data)
+    dataClone.splice(currentCvIndex, 1, currentCv)
+    setData(dataClone)
+  }, [currentCv])
+
+  useEffect(() => {
+    if (data !== undefined) {
+      localStorage.setItem('data', JSON.stringify(data))
+    }
+  }, [data])
 
   useEffect(() => {
     return () => {

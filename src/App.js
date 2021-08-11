@@ -8,8 +8,9 @@ import Preview from './pages/Preview'
 function App() {
   const [data, setData] = useState(undefined)
   const [currentCv, setCurrentCv] = useState(undefined)
-  const [inHome, setInHome] = useState(false)
-  const [inCreating, setInCreating] = useState(true)
+  const [currentCvIndex, setCurrentCvIndex] = useState(undefined)
+  const [inHome, setInHome] = useState(true)
+  const [inCreating, setInCreating] = useState(false)
   const [inPreview, setInPreview] = useState(false)
 
   useEffect(() => {
@@ -21,7 +22,16 @@ function App() {
 
   return (
     <>
-      <DataContext.Provider value={{ data, setData, currentCv, setCurrentCv }}>
+      <DataContext.Provider
+        value={{
+          data,
+          setData,
+          currentCv,
+          setCurrentCv,
+          currentCvIndex,
+          setCurrentCvIndex,
+        }}
+      >
         {inHome && (
           <Home
             setInHome={setInHome}

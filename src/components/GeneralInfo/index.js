@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import clone from 'just-clone'
 import {
   CancelButton,
   Container,
@@ -15,13 +14,6 @@ import {
 } from './styles/GeneralInfo'
 
 export default function GeneralInfo(props) {
-  const [currentCvIndex] = useState(
-    props.whichPage === 'preview'
-      ? props.data.indexOf(props.currentCv)
-      : undefined
-  )
-  /////checar cvindex
-
   const [Cv, setCv] = useState({
     fullName: '',
     age: '',
@@ -40,23 +32,9 @@ export default function GeneralInfo(props) {
   ]
 
   useEffect(() => {
-    if (props.whichPage === 'preview') {
-      const dataClone = clone(props.data)
-      dataClone.splice(currentCvIndex, 1, props.currentCv)
-      props.setData(dataClone)
-    }
-  }, [props.currentCv])
-
-  useEffect(() => {
-    if (props.whichPage === 'preview' && props.data !== undefined) {
-      localStorage.clear()
-      localStorage.setItem('data', JSON.stringify(props.data))
-    }
-  }, [props.data])
-
-  useEffect(() => {
     if (props.whichPage === 'creating') props.setProgress(1)
-    if (props.whichPage === 'preview')
+
+    if (props.whichPage === 'preview') {
       setCv({
         fullName: props.currentCv.fullName,
         age: props.currentCv.age,
@@ -67,6 +45,8 @@ export default function GeneralInfo(props) {
         gitHub: props.currentCv.gitHub,
         linkedIn: props.currentCv.linkedIn,
       })
+    }
+
     return () => {
       setCv({
         fullName: '',

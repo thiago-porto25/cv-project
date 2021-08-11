@@ -12,7 +12,7 @@ const DownloadButton = styled.button``
 const NoCv = styled.h1``
 
 export default function Preview(props) {
-  const { setData, data } = useContext(DataContext)
+  const { setData, data, currentCvIndex } = useContext(DataContext)
 
   return (
     <PreviewBg>
@@ -20,6 +20,7 @@ export default function Preview(props) {
       <Container>
         {props.currentCv ? (
           <DocPreview
+            currentCvIndex={currentCvIndex}
             currentCv={props.currentCv}
             setCurrentCv={props.setCurrentCv}
             data={data}

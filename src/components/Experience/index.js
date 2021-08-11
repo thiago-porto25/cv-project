@@ -1,15 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/*
-  - Data is not properly saving and the effect hook is also not listening to it in the right way.
-maybe i may need to create a custom hook that listens for changes in data and current CV.
-
-  - encountered a bug where a Cv duplicated itself on top of another.
-
-  - encountered a bug when creating a no experience Cv and then in the preview page clicking on the
-  checkbox to add experience. probably i may have to add state to the checkbox checked attribute.
-*/
 import React, { useState, useEffect } from 'react'
-import clone from 'just-clone'
 import Box from '../ExpBox'
 import {
   AddButton,
@@ -27,24 +17,8 @@ import {
 } from './styles/Experience'
 
 export default function Experience(props) {
-  const [currentCvIndex, setCurrentCvIndex] = useState(
-    props.whichPage === 'preview' ? props.data.indexOf(props.currentCv) : 'none'
-  )
-  const [count, setCount] = useState(
-    props.whichPage === 'creating'
-      ? 0
-      : props.currentCv.experience === 'none' ||
-        props.currentCv.experience.length <= 0
-      ? 0
-      : props.currentCv.experience.length - 1
-  )
-  const [noExp, setNoExp] = useState(
-    props.whichPage === 'creating'
-      ? false
-      : props.currentCv.experience === 'none'
-      ? true
-      : false
-  )
+  const [count, setCount] = useState(0)
+  const [noExp, setNoExp] = useState(false)
   const [info1, setInfo1] = useState({
     company: '',
     position: '',
@@ -93,6 +67,14 @@ export default function Experience(props) {
     if (props.whichPage === 'creating') props.setProgress(3)
 
     if (props.whichPage === 'preview') {
+      setNoExp(props.currentCv.experience === 'none' ? true : false)
+      setCount(
+        props.currentCv.experience === 'none' ||
+          props.currentCv.experience.length <= 0
+          ? 0
+          : props.currentCv.experience.length - 1
+      )
+
       const exp = props.currentCv.experience
 
       switch (exp.length) {
@@ -118,30 +100,14 @@ export default function Experience(props) {
           break
       }
     }
+
     return () => {
       if (props.whichPage === 'creating') {
         setCount(0)
         setNoExp(false)
       }
-      setCurrentCvIndex('none')
     }
   }, [])
-
-  useEffect(() => {
-    if (props.whichPage === 'preview') {
-      const dataClone = clone(props.data)
-      dataClone.splice(currentCvIndex, 1, props.currentCv)
-      props.setData(dataClone)
-    }
-  }, [props.currentCv])
-
-  useEffect(() => {
-    if (props.whichPage === 'preview' && props.data !== undefined) {
-      console.log(props.data)
-      localStorage.clear()
-      localStorage.setItem('data', JSON.stringify(props.data))
-    }
-  }, [props.data])
 
   return (
     <Container>
@@ -150,20 +116,21 @@ export default function Experience(props) {
         method="POST"
         onSubmit={(e) => {
           e.preventDefault()
+
+          let expInfo
+          if (!noExp) {
+            expInfo = [info1, info2, info3, info4].filter(
+              (item) => item.company !== '' && item.company !== undefined
+            )
+          } else expInfo = 'none'
+
+          props.setCurrentCv({ ...props.currentCv, experience: expInfo })
+
           if (props.whichPage === 'creating') {
             props.setInExperience(false)
             props.setInSkills(true)
           }
           if (props.whichPage === 'preview') props.setIsEditingExp(false)
-
-          let expInfo
-          if (!noExp) {
-            expInfo = [info1, info2, info3, info4].filter(
-              (item) => item.company !== '' && item.position !== ''
-            )
-          } else expInfo = 'none'
-
-          props.setCurrentCv({ ...props.currentCv, experience: expInfo })
         }}
       >
         <Frame>
@@ -184,9 +151,8 @@ export default function Experience(props) {
         <Label>I have no prior experience</Label>
         <Checkbox
           type="checkbox"
-          value={noExp}
-          defaultChecked={noExp}
-          onClick={() => {
+          checked={noExp}
+          onChange={() => {
             if (!noExp) setCount(0)
             setNoExp((prev) => !prev)
           }}

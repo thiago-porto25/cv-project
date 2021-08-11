@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
-import clone from 'just-clone'
+import React, { useState, useEffect, useContext } from 'react'
+import DataContext from '../../context/DataContext'
 import {
   AddSkill,
   CancelButton,
@@ -15,11 +15,7 @@ import {
 } from './styles/Skills'
 
 export default function Skills(props) {
-  const [currentCvIndex] = useState(
-    props.whichPage === 'preview'
-      ? props.data.indexOf(props.currentCv)
-      : undefined
-  )
+  const { setCurrentCvIndex } = useContext(DataContext)
   const [newSkill, setNewSkill] = useState('')
   const [skillsList, setSkillsList] = useState([])
 
@@ -34,14 +30,15 @@ export default function Skills(props) {
       props.whichPage === 'creating' &&
       props.currentCv.skills !== undefined
     ) {
-      if (props.data === undefined) {
+      if (!props.data) {
         props.setData([props.currentCv])
-      } else props.setData([...props.data, props.currentCv])
-    }
-    if (props.whichPage === 'preview') {
-      const dataClone = clone(props.data)
-      dataClone.splice(currentCvIndex, 1, props.currentCv)
-      props.setData(dataClone)
+        setCurrentCvIndex(0)
+        console.log('shows if data is undefined')
+      } else {
+        props.setData([...props.data, props.currentCv])
+        setCurrentCvIndex(props.data.length)
+        console.log('shows if data is NOT undefined')
+      }
     }
   }, [props.currentCv])
 
@@ -54,6 +51,7 @@ export default function Skills(props) {
   useEffect(() => {
     if (props.whichPage === 'creating') props.setProgress(4)
     if (props.whichPage === 'preview') setSkillsList(props.currentCv.skills)
+
     return () => {
       setNewSkill('')
       setSkillsList([])
@@ -73,7 +71,7 @@ export default function Skills(props) {
               props.setInSkills(false)
               props.setInCreating(false)
               props.setInPreview(true)
-            }, 500)
+            }, 1000)
           }
           if (props.whichPage === 'preview') props.setIsEditingSkills(false)
         }}

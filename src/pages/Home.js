@@ -13,7 +13,7 @@ const HomeContainer = styled.div``
 const NewCVButton = styled.button``
 
 export default function Home(props) {
-  const { data, setCurrentCv } = useContext(DataContext)
+  const { data, setCurrentCv, setCurrentCvIndex } = useContext(DataContext)
 
   return (
     <HomeBg>
@@ -33,6 +33,7 @@ export default function Home(props) {
                 props.setInHome(false)
                 props.setInPreview(true)
                 setCurrentCv(item)
+                setCurrentCvIndex(i)
               }}
             />
           ))

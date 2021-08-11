@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import clone from 'just-clone'
 import Box from '../EducBox'
 import {
   AddButton,
@@ -16,18 +15,7 @@ import {
 } from './styles/Education'
 
 export default function Education(props) {
-  const [currentCvIndex, setCurrentCvIndex] = useState(
-    props.whichPage === 'preview'
-      ? props.data.indexOf(props.currentCv)
-      : undefined
-  )
-  const [count, setCount] = useState(
-    props.whichPage === 'creating'
-      ? 0
-      : props.currentCv.education.length <= 0
-      ? 0
-      : props.currentCv.education.length - 1
-  )
+  const [count, setCount] = useState(0)
   const [info1, setInfo1] = useState({
     institution: '',
     degree: '',
@@ -54,22 +42,15 @@ export default function Education(props) {
   })
 
   useEffect(() => {
-    if (props.whichPage === 'preview') {
-      const dataClone = clone(props.data)
-      dataClone.splice(currentCvIndex, 1, props.currentCv)
-      props.setData(dataClone)
-    }
-  }, [props.currentCv])
+    if (props.whichPage === 'creating') props.setProgress(2)
 
-  useEffect(() => {
-    if (props.whichPage === 'preview' && props.data !== undefined) {
-      localStorage.clear()
-      localStorage.setItem('data', JSON.stringify(props.data))
-    }
-  }, [props.data])
-
-  useEffect(() => {
     if (props.whichPage === 'preview') {
+      setCount(
+        props.currentCv.education.length <= 0
+          ? 0
+          : props.currentCv.education.length - 1
+      )
+
       const educ = props.currentCv.education
 
       switch (educ.length) {
@@ -95,13 +76,8 @@ export default function Education(props) {
           break
       }
     }
-  }, [])
-
-  useEffect(() => {
-    if (props.whichPage === 'creating') props.setProgress(2)
     return () => {
       setCount(0)
-      setCurrentCvIndex(undefined)
     }
   }, [])
 
@@ -113,16 +89,16 @@ export default function Education(props) {
         onSubmit={(e) => {
           e.preventDefault()
 
+          const educInfo = [info1, info2, info3, info4].filter(
+            (item) => item.institution !== '' && item.degree !== ''
+          )
+          props.setCurrentCv({ ...props.currentCv, education: educInfo })
+
           if (props.whichPage === 'creating') {
             props.setInEducation(false)
             props.setInExperience(true)
           }
           if (props.whichPage === 'preview') props.setIsEditingEduc(false)
-
-          const educInfo = [info1, info2, info3, info4].filter(
-            (item) => item.institution !== '' && item.degree !== ''
-          )
-          props.setCurrentCv({ ...props.currentCv, education: educInfo })
         }}
       >
         <Frame>
