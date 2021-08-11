@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* my theory is when closing the creating component the Cvindex need to be set */
 import React, { useState, useEffect } from 'react'
 import clone from 'just-clone'
 import GeneralInfo from '../GeneralInfo'
