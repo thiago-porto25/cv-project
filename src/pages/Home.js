@@ -5,13 +5,17 @@ import DataContext from '../context/DataContext'
 
 const CvsContainer = styled.div`
   display: grid;
+  gap: 10px;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
+  width: 90%;
+  margin-left: 10px;
+  margin-right: 10px;
 `
 
 const EmptyMessage = styled.h1``
 
-const HomeBg = styled.div`
+const HomeBg = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +26,7 @@ const HomeBg = styled.div`
 const HomeContainer = styled.div`
   width: 80%;
   height: 90%;
+  border-radius: 10px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -50,7 +55,8 @@ const NewCVButton = styled.button`
 `
 
 export default function Home(props) {
-  const { data, setCurrentCv, setCurrentCvIndex } = useContext(DataContext)
+  const { data, setData, setCurrentCv, setCurrentCvIndex } =
+    useContext(DataContext)
 
   return (
     <>
@@ -66,8 +72,10 @@ export default function Home(props) {
               data.map((item, i) => (
                 <CvItem
                   key={`${item} - ${i}`}
-                  data-id={i}
+                  itemId={i}
                   itemData={item}
+                  setData={setData}
+                  data={data}
                   onClick={() => {
                     props.setInHome(false)
                     props.setInPreview(true)

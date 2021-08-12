@@ -7,6 +7,6 @@ export const GlobalStyles = createGlobalStyle`
     color: white;
     font-size: 16px;
     margin: 0;
-    height: 100vh;
+    height: 95vh;
   }
 `
