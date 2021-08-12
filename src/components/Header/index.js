@@ -11,8 +11,10 @@ export default function Header(props) {
   }
   return (
     <Container>
-      i'm Header
-      <Button onClick={handleClick}>Go Home</Button>
+      <span>Cv Creator App</span>
+      <Button onClick={handleClick}>
+        <i className="fas fa-home"></i>
+      </Button>
     </Container>
   )
 }
