@@ -22,28 +22,82 @@ export const EducFrame = styled.section`
   position: relative;
 `
 export const EducInner = styled.div`
-  span {
-    font-weight: bold;
+  background-color: #eeeeee;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0px 20px 20px 20px;
+  margin-bottom: 20px;
+
+  h3 {
+    font-weight: normal;
+  }
+
+  &:last-of-type {
+    margin-bottom: 40px;
   }
 `
 export const ExpFrame = styled.section`
   position: relative;
 `
-export const ExpInner = styled.div``
+export const ExpInner = styled.div`
+  background-color: #eeeeee;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0px 20px 0px 20px;
+  margin-bottom: 20px;
+
+  h3 {
+    font-weight: normal;
+  }
+
+  &:last-of-type {
+    margin-bottom: 40px;
+  }
+`
 export const InfoFrame = styled.section`
+  padding-left: 20px;
   position: relative;
+
+  h2 {
+    margin-left: -20px;
+    font-size: 40px;
+    font-weight: bolder;
+  }
 `
 export const Line = styled.hr``
+
 export const SkillsFrame = styled.section`
   position: relative;
 `
-export const SkillsItem = styled.li``
-export const SkillsList = styled.ul``
-export const Text = styled.p`
-  margin-top: 0px;
-  margin-bottom: 5px;
+export const SkillsItem = styled.li`
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
   &:last-of-type {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
   }
 `
-export const Title = styled.h1``
+
+export const SkillsList = styled.ul`
+  list-style: square;
+`
+
+export const Text = styled.p`
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+
+  &::first-of-type {
+    margin-top: 0px;
+  }
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
+`
+export const Title = styled.h1`
+  font-size: 35px;
+`
