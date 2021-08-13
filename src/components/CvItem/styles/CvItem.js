@@ -15,6 +15,7 @@ export const Container = styled.div`
   position: relative;
 
   &:hover {
+    background-color: #eeeeee;
     box-shadow: 0px 0px 10px gray;
   }
 `

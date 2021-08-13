@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container, Button } from './styles/Header'
+import { Container, Icon, HomeButton, NewCVButton } from './styles/Header'
 
 export default function Header(props) {
-  const handleClick = () => {
+  const handleHomeClick = () => {
     if (!props.inHome) {
       props.setInHome(true)
       props.setInCreating(false)
@@ -11,10 +11,21 @@ export default function Header(props) {
   }
   return (
     <Container>
-      <span>Cv Creator App</span>
-      <Button onClick={handleClick}>
-        <i className="fas fa-home"></i>
-      </Button>
+      <span>CV CREATOR</span>
+      {props.inHome ? (
+        <NewCVButton
+          onClick={() => {
+            props.setInHome(false)
+            props.setInCreating(true)
+          }}
+        >
+          <Icon className="fas fa-plus"></Icon> New CV
+        </NewCVButton>
+      ) : (
+        <HomeButton onClick={handleHomeClick}>
+          <i className="fas fa-home"></i>
+        </HomeButton>
+      )}
     </Container>
   )
 }

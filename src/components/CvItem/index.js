@@ -19,9 +19,9 @@ export default function CvItem(props) {
 
   return (
     <Container>
-      <Text>{`${props.itemData.fullName.split(' ')[0]}'s CV`}</Text>
+      <Text>{props.itemData.fullName.split(' ')[0]}</Text>
       <ButtonsContainer>
-        <PreviewButton {...props}>Open</PreviewButton>
+        <PreviewButton {...props}>Open CV</PreviewButton>
       </ButtonsContainer>
       <Delete onClick={() => handleDelete(props.itemId)}>
         <i className="fas fa-trash-alt"></i>

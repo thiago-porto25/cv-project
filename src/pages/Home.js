@@ -20,38 +20,20 @@ const HomeBg = styled.section`
   justify-content: center;
   align-items: center;
   background-color: #010048;
-  height: 100%;
+  height: 87.3%;
+  min-height: 500px;
 `
 
 const HomeContainer = styled.div`
   width: 80%;
-  height: 90%;
+  max-width: 800px;
+  height: 80%;
   border-radius: 10px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-`
-
-const NewCVButton = styled.button`
-  width: 14rem;
-  height: 3rem;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #03002a;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0px 0px 5px black;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: 100ms ease-in-out;
-
-  &:hover {
-    background-color: #010057;
-    transform: scale(1.05);
-  }
 `
 
 export default function Home(props) {
@@ -86,14 +68,6 @@ export default function Home(props) {
               ))
             )}
           </CvsContainer>
-          <NewCVButton
-            onClick={() => {
-              props.setInHome(false)
-              props.setInCreating(true)
-            }}
-          >
-            CREATE A NEW CV
-          </NewCVButton>
         </HomeContainer>
       </HomeBg>
       <Footer />
