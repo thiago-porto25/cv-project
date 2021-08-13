@@ -36,7 +36,7 @@ export const HomeButton = styled.button`
   transition: 200ms ease-in-out;
 
   &:hover {
-    background-color: #eeeeee;
+    color: #eeeeee;
     transform: scale(1.2);
   }
 `
