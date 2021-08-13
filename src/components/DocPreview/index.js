@@ -66,13 +66,29 @@ export default function DocPreview(props) {
         ) : (
           <>
             <h2>{currentCv.fullName}</h2>
-            <Text>{currentCv.age}</Text>
+            <Text>{currentCv.age} years</Text>
             <Text>{currentCv.gender}</Text>
-            <Text>{currentCv.location}</Text>
-            <Text>{currentCv.phone}</Text>
-            <Text>{currentCv.email}</Text>
-            <Text>{currentCv.gitHub}</Text>
-            <Text>{currentCv.linkedIn}</Text>
+            <Text>
+              <i className="fas fa-map-marker-alt"></i> {` `}
+              {currentCv.location}
+            </Text>
+            <Text>
+              <i className="fas fa-phone"></i> {` `}
+              {currentCv.phone}
+            </Text>
+            <Text>
+              {' '}
+              <i className="fas fa-envelope"></i> {` `}
+              {currentCv.email}
+            </Text>
+            <Text>
+              <i className="fab fa-github"></i> {` `}
+              {currentCv.gitHub ? currentCv.gitHub : '-'}
+            </Text>
+            <Text>
+              <i className="fab fa-linkedin-in"></i> {` `}
+              {currentCv.linkedIn ? currentCv.linkedIn : '-'}
+            </Text>
             <EditButton onClick={() => setIsEditingInfo(true)}>
               <i className="fas fa-edit"></i>
             </EditButton>
@@ -172,6 +188,7 @@ export default function DocPreview(props) {
           </>
         )}
       </SkillsFrame>
+      <Line />
     </Container>
   )
 }
