@@ -176,7 +176,7 @@ export default function DocPreview(props) {
             whichPage="preview"
           />
         ) : (
-          <>
+          <div>
             <SkillsList>
               {currentCv.skills.map((item, i) => (
                 <SkillsItem key={`${item}-${i}`}>{item}</SkillsItem>
@@ -185,7 +185,7 @@ export default function DocPreview(props) {
             <EditButton onClick={() => setIsEditingSkills(true)}>
               <i className="fas fa-edit"></i>
             </EditButton>
-          </>
+          </div>
         )}
       </SkillsFrame>
       <Line />

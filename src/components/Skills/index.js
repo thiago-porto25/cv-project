@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import DataContext from '../../context/DataContext'
 import {
   AddSkill,
+  ButtonsContainer,
   CancelButton,
   Container,
   FinishButton,
@@ -60,7 +61,7 @@ export default function Skills(props) {
 
   return (
     <Container>
-      <Title>Skills</Title>
+      {props.whichPage === 'creating' && <Title>Skills</Title>}
       <Form
         onSubmit={(e) => {
           e.preventDefault()
@@ -81,6 +82,7 @@ export default function Skills(props) {
             type="text"
             value={newSkill}
             onChange={({ target }) => setNewSkill(target.value)}
+            placeholder="Add a skill here..."
           />
           <AddSkill
             type="button"
@@ -104,12 +106,12 @@ export default function Skills(props) {
           ))}
         </List>
         {props.whichPage === 'preview' ? (
-          <>
+          <ButtonsContainer>
             <CancelButton onClick={() => props.setIsEditingSkills(false)}>
               Cancel
             </CancelButton>
             <SaveButton type="submit">Save</SaveButton>
-          </>
+          </ButtonsContainer>
         ) : (
           <FinishButton type="submit">Finish CV</FinishButton>
         )}

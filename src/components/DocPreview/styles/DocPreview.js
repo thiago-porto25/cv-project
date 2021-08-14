@@ -68,6 +68,10 @@ export const Line = styled.hr``
 
 export const SkillsFrame = styled.section`
   position: relative;
+
+  & div:first-child {
+    margin-left: 20px;
+  }
 `
 export const SkillsItem = styled.li`
   margin-top: 10px;
