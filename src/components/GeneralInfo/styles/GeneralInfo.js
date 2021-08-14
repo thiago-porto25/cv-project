@@ -1,22 +1,87 @@
 import styled from 'styled-components'
 import Select from 'react-select'
 
-export const CancelButton = styled.button``
+export const ButtonsContainer = styled.div`
+  margin: auto;
+  margin-bottom: 20px;
+`
 
-export const Container = styled.div``
+export const CancelButton = styled.button`
+  width: 8rem;
+  margin: auto;
+  border: none;
+  border-radius: 5px;
+  background-color: darkred;
+  color: white;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 25px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 200ms ease-in-out;
 
-export const Column = styled.div``
+  &:hover {
+    background-color: #c30101;
+  }
+`
 
-export const Form = styled.form``
+export const Container = styled.div`
+  height: fit-content;
+`
 
-export const Input = styled.input``
+export const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-left: -20px;
+  justify-content: space-around;
+`
 
-export const Label = styled.label``
+export const Input = styled.input`
+  border: 1.5px solid lightgray;
+  border-radius: 3px;
+  height: 2rem;
+  padding-left: 10px;
+  color: #333333;
+  font-size: 16px;
+  width: auto;
+  margin-bottom: 20px;
+`
+
+export const Label = styled.label`
+  font-weight: bold;
+  font-size: 17px;
+`
 
 export const NextButton = styled.button``
 
-export const SaveButton = styled.button``
+export const SaveButton = styled.button`
+  width: 8rem;
+  margin: auto;
+  border: none;
+  border-radius: 5px;
+  background-color: #010048;
+  color: white;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 200ms ease-in-out;
 
-export const SelectGender = styled(Select)``
+  &:hover {
+    background-color: #02006c;
+  }
+`
 
-export const Title = styled.h1``
+export const SelectGender = styled(Select)`
+  margin-bottom: 20px;
+`
+
+export const Text = styled.p`
+  color: red;
+  margin-top: 0px;
+  margin-bottom: 20px;
+`
+
+export const Title = styled.h1`
+  font-size: 35px;
+  margin-left: -20px;
+`
