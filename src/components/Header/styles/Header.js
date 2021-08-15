@@ -68,4 +68,10 @@ export const NewCVButton = styled.button`
   &:hover > ${Icon} {
     transform: rotate(90deg);
   }
+
+  &:disabled {
+    opacity: 0.5;
+    user-select: none;
+    cursor: auto;
+  }
 `

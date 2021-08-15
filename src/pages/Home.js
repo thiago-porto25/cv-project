@@ -40,9 +40,11 @@ export default function Home(props) {
   const { data, setData, setCurrentCv, setCurrentCvIndex } =
     useContext(DataContext)
 
+  if (data) console.log(data.length)
+
   return (
     <>
-      <Header {...props} />
+      <Header {...props} data={data} />
       <HomeBg>
         <HomeContainer>
           <CvsContainer>
