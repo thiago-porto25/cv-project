@@ -45,7 +45,10 @@ export const CancelButton = styled.button`
 
 export const Container = styled.div``
 
-export const Frame = styled.div``
+export const Frame = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 export const FinishButton = styled.button``
 
@@ -62,7 +65,26 @@ export const Input = styled.input`
   margin-bottom: 20px;
 `
 
-export const List = styled.ul``
+export const List = styled.ul`
+  li {
+    list-style-type: square;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  i {
+    position: absolute;
+    right: 60%;
+    margin-left: 20px;
+    color: darkred;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+`
 
 export const SaveButton = styled.button`
   width: 8rem;
