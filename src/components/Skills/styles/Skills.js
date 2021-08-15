@@ -50,7 +50,22 @@ export const Frame = styled.div`
   justify-content: center;
 `
 
-export const FinishButton = styled.button``
+export const FinishButton = styled.button`
+  width: 9rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #010048;
+  color: white;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 200ms ease-in-out;
+
+  &:hover {
+    background-color: #02006c;
+  }
+`
 
 export const Form = styled.form``
 

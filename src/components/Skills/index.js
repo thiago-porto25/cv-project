@@ -113,7 +113,9 @@ export default function Skills(props) {
             <SaveButton type="submit">Save</SaveButton>
           </ButtonsContainer>
         ) : (
-          <FinishButton type="submit">Finish CV</FinishButton>
+          <ButtonsContainer>
+            <FinishButton type="submit">Finish CV</FinishButton>
+          </ButtonsContainer>
         )}
       </Form>
     </Container>

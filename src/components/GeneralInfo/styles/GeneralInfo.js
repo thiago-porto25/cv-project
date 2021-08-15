@@ -27,11 +27,9 @@ export const CancelButton = styled.button`
 export const Container = styled.div`
   height: fit-content;
 `
-
 export const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr;
-  margin-left: -20px;
   justify-content: space-around;
 `
 
@@ -51,7 +49,22 @@ export const Label = styled.label`
   font-size: 17px;
 `
 
-export const NextButton = styled.button``
+export const NextButton = styled.button`
+  width: 8rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #010048;
+  color: white;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 200ms ease-in-out;
+
+  &:hover {
+    background-color: #02006c;
+  }
+`
 
 export const SaveButton = styled.button`
   width: 8rem;
@@ -83,5 +96,4 @@ export const Text = styled.p`
 
 export const Title = styled.h1`
   font-size: 35px;
-  margin-left: -20px;
 `

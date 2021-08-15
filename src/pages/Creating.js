@@ -11,9 +11,28 @@ import {
   Skills,
 } from '../components'
 
-const CreatingBg = styled.div``
+const CreatingBg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #010048;
+  min-height: 95vh;
+`
 
-const CreatingContainer = styled.div``
+const CreatingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  width: 80%;
+  max-width: 700px;
+  min-height: 400px;
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+`
 
 export default function Creating(props) {
   const { setCurrentCv, setData, currentCv, data } = useContext(DataContext)
@@ -34,54 +53,56 @@ export default function Creating(props) {
   }, [])
 
   return (
-    <CreatingBg>
+    <>
       <Header {...props} />
-      <CreatingContainer>
-        <ProgressBar progress={progress} />
-        {inGeneralInfo && (
-          <GeneralInfo
-            setInGeneralInfo={setInGeneralInfo}
-            setInEducation={setInEducation}
-            setCurrentCv={setCurrentCv}
-            setProgress={setProgress}
-            whichPage="creating"
-          />
-        )}
-        {inEducation && (
-          <Education
-            setInEducation={setInEducation}
-            setInExperience={setInExperience}
-            setCurrentCv={setCurrentCv}
-            currentCv={currentCv}
-            setProgress={setProgress}
-            whichPage="creating"
-          />
-        )}
-        {inExperience && (
-          <Experience
-            setInExperience={setInExperience}
-            setInSkills={setInSkills}
-            setCurrentCv={setCurrentCv}
-            currentCv={currentCv}
-            setProgress={setProgress}
-            whichPage="creating"
-          />
-        )}
-        {inSkills && (
-          <Skills
-            setInSkills={setInSkills}
-            setCurrentCv={setCurrentCv}
-            currentCv={currentCv}
-            setData={setData}
-            data={data}
-            setInCreating={props.setInCreating}
-            setInPreview={props.setInPreview}
-            setProgress={setProgress}
-            whichPage="creating"
-          />
-        )}
-      </CreatingContainer>
+      <CreatingBg>
+        <CreatingContainer>
+          <ProgressBar progress={progress} />
+          {inGeneralInfo && (
+            <GeneralInfo
+              setInGeneralInfo={setInGeneralInfo}
+              setInEducation={setInEducation}
+              setCurrentCv={setCurrentCv}
+              setProgress={setProgress}
+              whichPage="creating"
+            />
+          )}
+          {inEducation && (
+            <Education
+              setInEducation={setInEducation}
+              setInExperience={setInExperience}
+              setCurrentCv={setCurrentCv}
+              currentCv={currentCv}
+              setProgress={setProgress}
+              whichPage="creating"
+            />
+          )}
+          {inExperience && (
+            <Experience
+              setInExperience={setInExperience}
+              setInSkills={setInSkills}
+              setCurrentCv={setCurrentCv}
+              currentCv={currentCv}
+              setProgress={setProgress}
+              whichPage="creating"
+            />
+          )}
+          {inSkills && (
+            <Skills
+              setInSkills={setInSkills}
+              setCurrentCv={setCurrentCv}
+              currentCv={currentCv}
+              setData={setData}
+              data={data}
+              setInCreating={props.setInCreating}
+              setInPreview={props.setInPreview}
+              setProgress={setProgress}
+              whichPage="creating"
+            />
+          )}
+        </CreatingContainer>
+      </CreatingBg>
       <Footer />
-    </CreatingBg>
+    </>
   )
 }

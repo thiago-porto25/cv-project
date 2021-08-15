@@ -7,11 +7,11 @@ import {
   Form,
   Input,
   Label,
+  NextButton,
   SaveButton,
   SelectGender,
-  NextButton,
-  Title,
   Text,
+  Title,
 } from './styles/GeneralInfo'
 
 export default function GeneralInfo(props) {
@@ -63,9 +63,20 @@ export default function GeneralInfo(props) {
   }, [])
 
   return (
-    <Container>
-      <Title>General Information</Title>
+    <Container
+      style={{
+        width: props.whichPage === 'creating' ? '90%' : '100%',
+      }}
+    >
+      <Title
+        style={{ marginLeft: props.whichPage === 'creating' ? '0px' : '-20px' }}
+      >
+        General Information
+      </Title>
       <Form
+        style={{
+          marginLeft: props.whichPage === 'creating' ? '0px' : '-20px',
+        }}
         method="POST"
         onSubmit={(e) => {
           e.preventDefault()
@@ -190,7 +201,9 @@ export default function GeneralInfo(props) {
             <SaveButton type="submit">Save</SaveButton>
           </ButtonsContainer>
         ) : (
-          <NextButton type="submit">Next</NextButton>
+          <ButtonsContainer>
+            <NextButton type="submit">Next</NextButton>
+          </ButtonsContainer>
         )}
       </Form>
     </Container>

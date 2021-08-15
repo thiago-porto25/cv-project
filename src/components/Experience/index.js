@@ -63,18 +63,24 @@ export default function Experience(props) {
         <Box info={info4} setInfo={setInfo4} setCount={setCount} />
       )}
       <RemoveButton
+        disabled={count <= 0}
         type="button"
         onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}
       >
         Remove
       </RemoveButton>
       <AddButton
+        disabled={count >= 3}
         type="button"
         onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
       >
         Add
       </AddButton>
-      <Text>Fields with * are required!</Text>
+      <Text>
+        Fields with * are required!
+        <br />
+        <br /> If 'End date' is empty it will display as 'current' in your CV!
+      </Text>
       <Line />
     </>
   )
@@ -126,7 +132,7 @@ export default function Experience(props) {
   }, [])
 
   return (
-    <Container>
+    <Container style={{ width: props.whichPage === 'creating' ? '90%' : '' }}>
       {props.whichPage === 'creating' && <Title>Experience</Title>}
       <Form
         method="POST"
@@ -159,6 +165,7 @@ export default function Experience(props) {
           }}
         />
         <Label>I have no prior experience.</Label>
+        <br />
         {props.whichPage === 'preview' ? (
           <ButtonsContainer>
             <CancelButton onClick={() => props.setIsEditingExp(false)}>
@@ -167,7 +174,9 @@ export default function Experience(props) {
             <SaveButton type="submit">Save</SaveButton>
           </ButtonsContainer>
         ) : (
-          <NextButton type="submit">Next</NextButton>
+          <ButtonsContainer>
+            <NextButton type="submit">Next</NextButton>
+          </ButtonsContainer>
         )}
       </Form>
     </Container>

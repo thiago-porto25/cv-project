@@ -83,7 +83,7 @@ export default function Education(props) {
   }, [])
 
   return (
-    <Container>
+    <Container style={{ width: props.whichPage === 'creating' ? '90%' : '' }}>
       {props.whichPage === 'creating' && <Title>Education:</Title>}
       <Form
         method="POST"
@@ -109,12 +109,14 @@ export default function Education(props) {
           {count >= 3 && <Box info={info4} setInfo={setInfo4} />}
           <Text>Fields with * are required!</Text>
           <RemoveButton
+            disabled={count <= 0}
             type="button"
             onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}
           >
             REMOVE
           </RemoveButton>
           <AddButton
+            disabled={count >= 3}
             type="button"
             onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
           >
@@ -130,7 +132,9 @@ export default function Education(props) {
             <SaveButton type="submit">Save</SaveButton>
           </ButtonsContainer>
         ) : (
-          <NextButton type="submit">Next</NextButton>
+          <ButtonsContainer>
+            <NextButton type="submit">Next</NextButton>
+          </ButtonsContainer>
         )}
       </Form>
     </Container>

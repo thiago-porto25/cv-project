@@ -62,7 +62,7 @@ export default function Box(props) {
         required
       />
 
-      <Label>*End date</Label>
+      <Label>End date</Label>
       <Input
         type="date"
         value={props.info.end}

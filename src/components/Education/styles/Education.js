@@ -16,6 +16,11 @@ export const AddButton = styled.button`
   &:hover {
     background-color: #02006c;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `
 
 export const ButtonsContainer = styled.div`
@@ -49,7 +54,22 @@ export const Form = styled.form``
 
 export const Frame = styled.div``
 
-export const NextButton = styled.button``
+export const NextButton = styled.button`
+  width: 8rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #010048;
+  color: white;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 200ms ease-in-out;
+
+  &:hover {
+    background-color: #02006c;
+  }
+`
 
 export const RemoveButton = styled.button`
   cursor: pointer;
@@ -66,6 +86,11 @@ export const RemoveButton = styled.button`
 
   &:hover {
     background-color: #c30101;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 `
 
