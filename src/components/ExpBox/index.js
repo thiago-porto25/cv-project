@@ -17,60 +17,59 @@ export default function Box(props) {
 
   return (
     <Container>
-      <div>
-        <Label>Company:</Label>
-        <Input
-          type="text"
-          maxLength="30"
-          value={props.info.company}
-          onChange={({ target }) =>
-            props.setInfo({ ...props.info, company: target.value })
-          }
-          required
-        />
+      <Label>*Company</Label>
+      <Input
+        placeholder="Company"
+        type="text"
+        maxLength="30"
+        value={props.info.company}
+        onChange={({ target }) =>
+          props.setInfo({ ...props.info, company: target.value })
+        }
+        required
+      />
 
-        <Label>Position:</Label>
-        <Input
-          type="text"
-          maxLength="30"
-          value={props.info.position}
-          onChange={({ target }) =>
-            props.setInfo({ ...props.info, position: target.value })
-          }
-          required
-        />
+      <Label>*Position</Label>
+      <Input
+        placeholder="Your Position"
+        type="text"
+        maxLength="30"
+        value={props.info.position}
+        onChange={({ target }) =>
+          props.setInfo({ ...props.info, position: target.value })
+        }
+        required
+      />
 
-        <Label>Description:</Label>
-        <Textarea
-          type="text"
-          maxLength="30"
-          value={props.info.description}
-          onChange={({ target }) =>
-            props.setInfo({ ...props.info, description: target.value })
-          }
-          required
-        />
-      </div>
-      <div>
-        <Label>Start date:</Label>
-        <Input
-          type="date"
-          value={props.info.start}
-          onChange={({ target }) =>
-            props.setInfo({ ...props.info, start: target.value })
-          }
-          required
-        />
+      <Label>*Description</Label>
+      <Textarea
+        placeholder="Job Description"
+        type="text"
+        maxLength="30"
+        value={props.info.description}
+        onChange={({ target }) =>
+          props.setInfo({ ...props.info, description: target.value })
+        }
+        required
+      />
+      <Label>*Start date</Label>
+      <Input
+        type="date"
+        value={props.info.start}
+        onChange={({ target }) =>
+          props.setInfo({ ...props.info, start: target.value })
+        }
+        required
+      />
 
-        <Label>End date:</Label>
-        <Input
-          type="date"
-          value={props.info.end}
-          onChange={({ target }) =>
-            props.setInfo({ ...props.info, end: target.value })
-          }
-        />
-      </div>
+      <Label>*End date</Label>
+      <Input
+        type="date"
+        value={props.info.end}
+        onChange={({ target }) =>
+          props.setInfo({ ...props.info, end: target.value })
+        }
+      />
     </Container>
   )
 }

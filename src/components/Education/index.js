@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Box from '../EducBox'
 import {
   AddButton,
+  ButtonsContainer,
   CancelButton,
   Container,
   Form,
@@ -83,7 +84,7 @@ export default function Education(props) {
 
   return (
     <Container>
-      <Title>Education:</Title>
+      {props.whichPage === 'creating' && <Title>Education:</Title>}
       <Form
         method="POST"
         onSubmit={(e) => {
@@ -106,26 +107,28 @@ export default function Education(props) {
           {count >= 1 && <Box info={info2} setInfo={setInfo2} />}
           {count >= 2 && <Box info={info3} setInfo={setInfo3} />}
           {count >= 3 && <Box info={info4} setInfo={setInfo4} />}
+          <Text>Fields with * are required!</Text>
           <RemoveButton
             type="button"
             onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}
           >
-            X
+            REMOVE
           </RemoveButton>
+          <AddButton
+            type="button"
+            onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
+          >
+            ADD
+          </AddButton>
         </Frame>
-        <AddButton
-          type="button"
-          onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
-        >
-          +
-        </AddButton>
+
         {props.whichPage === 'preview' ? (
-          <>
+          <ButtonsContainer>
             <CancelButton onClick={() => props.setIsEditingEduc(false)}>
               Cancel
             </CancelButton>
             <SaveButton type="submit">Save</SaveButton>
-          </>
+          </ButtonsContainer>
         ) : (
           <NextButton type="submit">Next</NextButton>
         )}

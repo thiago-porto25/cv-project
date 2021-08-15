@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react'
 import Box from '../ExpBox'
 import {
   AddButton,
+  ButtonsContainer,
   CancelButton,
   Checkbox,
   Container,
   Form,
   Frame,
   Label,
+  Line,
   NextButton,
   RemoveButton,
   SaveButton,
@@ -60,6 +62,20 @@ export default function Experience(props) {
       {count >= 3 && (
         <Box info={info4} setInfo={setInfo4} setCount={setCount} />
       )}
+      <RemoveButton
+        type="button"
+        onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}
+      >
+        Remove
+      </RemoveButton>
+      <AddButton
+        type="button"
+        onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
+      >
+        Add
+      </AddButton>
+      <Text>Fields with * are required!</Text>
+      <Line />
     </>
   )
 
@@ -111,7 +127,7 @@ export default function Experience(props) {
 
   return (
     <Container>
-      <Title>Experience</Title>
+      {props.whichPage === 'creating' && <Title>Experience</Title>}
       <Form
         method="POST"
         onSubmit={(e) => {
@@ -133,22 +149,7 @@ export default function Experience(props) {
           if (props.whichPage === 'preview') props.setIsEditingExp(false)
         }}
       >
-        <Frame>
-          {!noExp ? boxes : null}
-          <RemoveButton
-            type="button"
-            onClick={() => setCount((prev) => (prev > 0 ? prev - 1 : prev))}
-          >
-            X
-          </RemoveButton>
-        </Frame>
-        <AddButton
-          type="button"
-          onClick={() => setCount((prev) => (prev < 3 ? prev + 1 : prev))}
-        >
-          +
-        </AddButton>
-        <Label>I have no prior experience</Label>
+        <Frame>{!noExp ? boxes : null}</Frame>
         <Checkbox
           type="checkbox"
           checked={noExp}
@@ -157,13 +158,14 @@ export default function Experience(props) {
             setNoExp((prev) => !prev)
           }}
         />
+        <Label>I have no prior experience.</Label>
         {props.whichPage === 'preview' ? (
-          <>
+          <ButtonsContainer>
             <CancelButton onClick={() => props.setIsEditingExp(false)}>
               Cancel
             </CancelButton>
             <SaveButton type="submit">Save</SaveButton>
-          </>
+          </ButtonsContainer>
         ) : (
           <NextButton type="submit">Next</NextButton>
         )}
