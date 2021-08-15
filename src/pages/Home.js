@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Header, Footer, CvItem } from '../components'
 import styled from 'styled-components'
 import DataContext from '../context/DataContext'
@@ -13,7 +13,11 @@ const CvsContainer = styled.div`
   margin-right: 10px;
 `
 
-const EmptyMessage = styled.h1``
+const EmptyMessage = styled.h1`
+  color: black;
+  margin: 0 auto;
+  margin-top: 100px;
+`
 
 const HomeBg = styled.section`
   display: flex;
@@ -40,19 +44,24 @@ export default function Home(props) {
   const { data, setData, setCurrentCv, setCurrentCvIndex } =
     useContext(DataContext)
 
-  if (data) console.log(data.length)
+  useEffect(() => {
+    if (data && data.length > 0) {
+      localStorage.setItem('data', JSON.stringify(data))
+    } else localStorage.clear()
+  }, [data])
 
   return (
     <>
       <Header {...props} data={data} />
       <HomeBg>
         <HomeContainer>
+          {!data && (
+            <EmptyMessage>
+              It seems you have no CVs. Create you first one!
+            </EmptyMessage>
+          )}
           <CvsContainer>
-            {!data ? (
-              <EmptyMessage>
-                It seems you have no CVs. Create you first one!
-              </EmptyMessage>
-            ) : (
+            {data &&
               data.map((item, i) => (
                 <CvItem
                   key={`${item} - ${i}`}
@@ -67,8 +76,7 @@ export default function Home(props) {
                     setCurrentCvIndex(i)
                   }}
                 />
-              ))
-            )}
+              ))}
           </CvsContainer>
         </HomeContainer>
       </HomeBg>

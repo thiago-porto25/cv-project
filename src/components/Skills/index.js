@@ -34,11 +34,9 @@ export default function Skills(props) {
       if (!props.data) {
         props.setData([props.currentCv])
         setCurrentCvIndex(0)
-        console.log('shows if data is undefined')
       } else {
         props.setData([...props.data, props.currentCv])
         setCurrentCvIndex(props.data.length)
-        console.log('shows if data is NOT undefined')
       }
     }
   }, [props.currentCv])

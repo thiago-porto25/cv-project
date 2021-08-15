@@ -57,7 +57,9 @@ export const Checkbox = styled.input`
 
 export const Container = styled.div``
 
-export const Form = styled.form``
+export const Form = styled.form`
+  height: 100%;
+`
 
 export const Frame = styled.div``
 

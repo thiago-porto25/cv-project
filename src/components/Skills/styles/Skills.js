@@ -67,7 +67,9 @@ export const FinishButton = styled.button`
   }
 `
 
-export const Form = styled.form``
+export const Form = styled.form`
+  height: 100%;
+`
 
 export const Input = styled.input`
   border: 1.5px solid lightgray;

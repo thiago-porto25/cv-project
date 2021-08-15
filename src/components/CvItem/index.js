@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   ButtonsContainer,
   Container,
@@ -12,10 +12,6 @@ export default function CvItem(props) {
     const newData = props.data.filter((_, i) => i !== id)
     props.setData(newData)
   }
-
-  useEffect(() => {
-    localStorage.setItem('data', JSON.stringify(props.data))
-  }, [props.data])
 
   return (
     <Container>
