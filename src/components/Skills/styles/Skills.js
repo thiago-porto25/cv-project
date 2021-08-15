@@ -62,10 +62,14 @@ export const Input = styled.input`
   color: #333333;
   font-size: 16px;
   width: auto;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 `
 
 export const List = styled.ul`
+  margin: auto;
+  width: 200px;
+  padding: 0;
+
   li {
     list-style-type: square;
     position: relative;
@@ -74,7 +78,7 @@ export const List = styled.ul`
 
   i {
     position: absolute;
-    right: 60%;
+    right: 0;
     margin-left: 20px;
     color: darkred;
     transition: 100ms ease-in-out;
