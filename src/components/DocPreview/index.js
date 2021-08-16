@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import clone from 'just-clone'
 import GeneralInfo from '../GeneralInfo'
 import Education from '../Education'
@@ -22,11 +22,21 @@ import {
 } from './styles/DocPreview'
 
 export default function DocPreview(props) {
-  const { currentCvIndex, currentCv, setCurrentCv, data, setData } = props
-  const [isEditingInfo, setIsEditingInfo] = useState(false)
-  const [isEditingEduc, setIsEditingEduc] = useState(false)
-  const [isEditingExp, setIsEditingExp] = useState(false)
-  const [isEditingSkills, setIsEditingSkills] = useState(false)
+  const {
+    currentCvIndex,
+    currentCv,
+    setCurrentCv,
+    data,
+    setData,
+    isEditingEduc,
+    isEditingExp,
+    isEditingInfo,
+    isEditingSkills,
+    setIsEditingEduc,
+    setIsEditingExp,
+    setIsEditingInfo,
+    setIsEditingSkills,
+  } = props
 
   useEffect(() => {
     if (data[currentCvIndex] === currentCv) return
@@ -179,7 +189,9 @@ export default function DocPreview(props) {
           <div>
             <SkillsList>
               {currentCv.skills.map((item, i) => (
-                <SkillsItem key={`${item}-${i}`}>{item}</SkillsItem>
+                <SkillsItem key={`${item}-${i}`}>
+                  <p>{item}</p>
+                </SkillsItem>
               ))}
             </SkillsList>
             <EditButton onClick={() => setIsEditingSkills(true)}>

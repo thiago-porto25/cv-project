@@ -28,7 +28,13 @@ export const EducInner = styled.div`
   padding: 0px 20px 20px 20px;
   margin-bottom: 20px;
 
+  h2 {
+    display: block;
+    word-wrap: break-word;
+  }
   h3 {
+    display: block;
+    word-wrap: break-word;
     font-weight: normal;
   }
 
@@ -46,8 +52,20 @@ export const ExpInner = styled.div`
   padding: 0px 20px 0px 20px;
   margin-bottom: 20px;
 
+  h2 {
+    display: block;
+    word-wrap: break-word;
+  }
+
   h3 {
+    display: block;
+    word-wrap: break-word;
     font-weight: normal;
+  }
+
+  p {
+    display: block;
+    word-wrap: break-word;
   }
 
   &:last-of-type {
@@ -62,6 +80,11 @@ export const InfoFrame = styled.section`
     margin-left: -20px;
     font-size: 40px;
     font-weight: bolder;
+    word-wrap: break-word;
+  }
+
+  @media (max-width) {
+    font-size: 35px;
   }
 `
 export const Line = styled.hr``
@@ -76,6 +99,11 @@ export const SkillsFrame = styled.section`
 export const SkillsItem = styled.li`
   margin-top: 10px;
   margin-bottom: 10px;
+
+  p {
+    display: block;
+    word-wrap: break-word;
+  }
 
   &:first-of-type {
     margin-top: 0;

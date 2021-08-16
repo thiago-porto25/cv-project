@@ -46,6 +46,10 @@ export const CancelButton = styled.button`
   &:hover {
     background-color: #c30101;
   }
+
+  @media (max-width: 700px) {
+    width: 7rem;
+  }
 `
 
 export const Checkbox = styled.input`
@@ -131,6 +135,10 @@ export const SaveButton = styled.button`
 
   &:hover {
     background-color: #02006c;
+  }
+
+  @media (max-width: 700px) {
+    width: 7rem;
   }
 `
 

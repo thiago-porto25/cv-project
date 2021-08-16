@@ -16,6 +16,10 @@ export const AddSkill = styled.button`
   &:hover {
     background-color: #02006c;
   }
+
+  @media (max-width: 700px) {
+    margin-left: 0;
+  }
 `
 
 export const ButtonsContainer = styled.div`
@@ -41,6 +45,10 @@ export const CancelButton = styled.button`
   &:hover {
     background-color: #c30101;
   }
+
+  @media (max-width: 700px) {
+    width: 7rem;
+  }
 `
 
 export const Container = styled.div``
@@ -48,6 +56,15 @@ export const Container = styled.div``
 export const Frame = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 0 !important;
+    margin-bottom: 40px;
+  }
 `
 
 export const FinishButton = styled.button`
@@ -80,29 +97,40 @@ export const Input = styled.input`
   font-size: 16px;
   width: auto;
   margin-bottom: 40px;
+
+  @media (max-width: 700px) {
+    margin-left: 0;
+  }
+`
+
+export const ItemText = styled.p`
+  width: 80%;
+  display: block;
+  word-wrap: break-word;
 `
 
 export const List = styled.ul`
   margin: auto;
-  width: 200px;
+  width: 230px;
   padding: 0;
 
   li {
     list-style-type: square;
     position: relative;
     margin-bottom: 10px;
-  }
+    width: 100%;
 
-  i {
-    position: absolute;
-    right: 0;
-    margin-left: 20px;
-    color: darkred;
-    transition: 100ms ease-in-out;
-    cursor: pointer;
+    i {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: darkred;
+      transition: 100ms ease-in-out;
+      cursor: pointer;
 
-    &:hover {
-      transform: scale(1.2);
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 `
@@ -122,6 +150,10 @@ export const SaveButton = styled.button`
 
   &:hover {
     background-color: #02006c;
+  }
+
+  @media (max-width: 700px) {
+    width: 7rem;
   }
 `
 

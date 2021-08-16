@@ -10,6 +10,7 @@ import {
   Form,
   Frame,
   Input,
+  ItemText,
   List,
   SaveButton,
   Title,
@@ -78,6 +79,7 @@ export default function Skills(props) {
         <Frame>
           <Input
             type="text"
+            maxLength="50"
             value={newSkill}
             onChange={({ target }) => setNewSkill(target.value)}
             placeholder="Add a skill here..."
@@ -95,7 +97,7 @@ export default function Skills(props) {
         <List>
           {skillsList.map((item, i) => (
             <li key={`${item} - ${i}`}>
-              {item}
+              <ItemText>{item}</ItemText>
               <i
                 className="fas fa-trash-alt"
                 onClick={() => handleDelete(i)}

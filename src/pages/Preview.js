@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { jsPDF } from 'jspdf'
 import { toPng } from 'html-to-image'
@@ -48,12 +48,24 @@ const DownloadButton = styled.button`
     background-color: #010057;
     transform: scale(1.05);
   }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `
 
-const NoCv = styled.h1``
+const NoCv = styled.h1`
+  font-size: 30px;
+  padding: 20px 20px;
+`
 
 export default function Preview(props) {
   const { setData, data, currentCvIndex } = useContext(DataContext)
+  const [isEditingInfo, setIsEditingInfo] = useState(false)
+  const [isEditingEduc, setIsEditingEduc] = useState(false)
+  const [isEditingExp, setIsEditingExp] = useState(false)
+  const [isEditingSkills, setIsEditingSkills] = useState(false)
 
   const createPdfFile = () => {
     props.setIsLoading(true)
@@ -86,20 +98,40 @@ export default function Preview(props) {
       <PreviewBg>
         <Container>
           {props.currentCv ? (
-            <DocPreview
-              className="myCv"
-              currentCvIndex={currentCvIndex}
-              currentCv={props.currentCv}
-              setCurrentCv={props.setCurrentCv}
-              data={data}
-              setData={setData}
-            />
+            <>
+              <DocPreview
+                className="myCv"
+                currentCvIndex={currentCvIndex}
+                currentCv={props.currentCv}
+                setCurrentCv={props.setCurrentCv}
+                data={data}
+                setData={setData}
+                isEditingEduc={isEditingEduc}
+                isEditingExp={isEditingExp}
+                isEditingInfo={isEditingInfo}
+                isEditingSkills={isEditingSkills}
+                setIsEditingEduc={setIsEditingEduc}
+                setIsEditingExp={setIsEditingExp}
+                setIsEditingInfo={setIsEditingInfo}
+                setIsEditingSkills={setIsEditingSkills}
+              />
+              <DownloadButton
+                disabled={
+                  !isEditingEduc &&
+                  !isEditingExp &&
+                  !isEditingInfo &&
+                  !isEditingSkills
+                    ? false
+                    : true
+                }
+                onClick={createPdfFile}
+              >
+                Download as PDF
+              </DownloadButton>
+            </>
           ) : (
-            <NoCv>You must have a CV to be able to view it</NoCv>
+            <NoCv>You must have a CV to be able to view it.</NoCv>
           )}
-          <DownloadButton onClick={createPdfFile}>
-            Download as PDF
-          </DownloadButton>
         </Container>
       </PreviewBg>
       <Footer />

@@ -110,8 +110,8 @@ export default function GeneralInfo(props) {
           placeholder="Your Full Name"
           value={Cv.fullName}
           onChange={({ target }) => setCv({ ...Cv, fullName: target.value })}
-          minLength="5"
-          maxLength="25"
+          minLength="3"
+          maxLength="40"
           required
         />
         <br />
@@ -141,7 +141,7 @@ export default function GeneralInfo(props) {
           type="text"
           placeholder="City, State"
           minLength="5"
-          maxLength="50"
+          maxLength="40"
           value={Cv.location}
           onChange={({ target }) => setCv({ ...Cv, location: target.value })}
           required
@@ -154,7 +154,7 @@ export default function GeneralInfo(props) {
           placeholder="Your Email"
           value={Cv.email}
           minLength="7"
-          maxLength="40"
+          maxLength="30"
           onChange={({ target }) => setCv({ ...Cv, email: target.value })}
           required
         />

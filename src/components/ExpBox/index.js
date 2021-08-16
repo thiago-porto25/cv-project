@@ -21,7 +21,7 @@ export default function Box(props) {
       <Input
         placeholder="Company"
         type="text"
-        maxLength="30"
+        maxLength="40"
         value={props.info.company}
         onChange={({ target }) =>
           props.setInfo({ ...props.info, company: target.value })
@@ -33,7 +33,7 @@ export default function Box(props) {
       <Input
         placeholder="Your Position"
         type="text"
-        maxLength="30"
+        maxLength="40"
         value={props.info.position}
         onChange={({ target }) =>
           props.setInfo({ ...props.info, position: target.value })
@@ -45,7 +45,7 @@ export default function Box(props) {
       <Textarea
         placeholder="Job Description"
         type="text"
-        maxLength="30"
+        maxLength="70"
         value={props.info.description}
         onChange={({ target }) =>
           props.setInfo({ ...props.info, description: target.value })
