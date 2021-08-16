@@ -8,6 +8,7 @@ const PreviewBg = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #010048;
+  min-height: 95vh;
 `
 
 const Container = styled.div`
