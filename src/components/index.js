@@ -1,6 +1,7 @@
 export { default as CvItem } from './CvItem'
 export { default as DocPreview } from './DocPreview'
 export { default as Education } from './Education'
+export { default as EmptyCvItem } from './EmptyCvItem'
 export { default as Experience } from './Experience'
 export { default as Footer } from './Footer'
 export { default as GeneralInfo } from './GeneralInfo'
