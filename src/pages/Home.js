@@ -47,7 +47,7 @@ export default function Home(props) {
   useEffect(() => {
     if (data && data.length > 0) {
       localStorage.setItem('data', JSON.stringify(data))
-    } else localStorage.clear()
+    } else if (data && data.length === 0) localStorage.clear()
   }, [data])
 
   return (
