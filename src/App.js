@@ -4,6 +4,7 @@ import DataContext from './context/DataContext'
 import Home from './pages/Home'
 import Creating from './pages/Creating'
 import Preview from './pages/Preview'
+import { LoadingModal } from './components'
 
 function App() {
   const [data, setData] = useState(undefined)
@@ -12,6 +13,7 @@ function App() {
   const [inHome, setInHome] = useState(true)
   const [inCreating, setInCreating] = useState(false)
   const [inPreview, setInPreview] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem('data'))
@@ -53,16 +55,20 @@ function App() {
           />
         )}
         {inPreview && (
-          <Preview
-            setInHome={setInHome}
-            setInCreating={setInCreating}
-            setInPreview={setInPreview}
-            currentCv={currentCv}
-            setCurrentCv={setCurrentCv}
-            inHome={inHome}
-            inCreating={inCreating}
-            inPreview={inPreview}
-          />
+          <>
+            {isLoading && <LoadingModal />}
+            <Preview
+              setInHome={setInHome}
+              setInCreating={setInCreating}
+              setInPreview={setInPreview}
+              currentCv={currentCv}
+              setCurrentCv={setCurrentCv}
+              inHome={inHome}
+              inCreating={inCreating}
+              inPreview={inPreview}
+              setIsLoading={setIsLoading}
+            />
+          </>
         )}
       </DataContext.Provider>
     </>

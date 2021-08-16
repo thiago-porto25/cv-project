@@ -56,6 +56,7 @@ export default function Preview(props) {
   const { setData, data, currentCvIndex } = useContext(DataContext)
 
   const createPdfFile = () => {
+    props.setIsLoading(true)
     const myCv = document.querySelector('.myCv')
     const myEditButtons = document.querySelectorAll('.fa-edit')
 
@@ -75,6 +76,7 @@ export default function Preview(props) {
       myCv.style.paddingLeft = ''
       myCv.style.paddingRight = ''
       myEditButtons.forEach((item) => (item.style.color = '#03002a'))
+      props.setIsLoading(false)
     })
   }
 
