@@ -11,6 +11,11 @@ const CvsContainer = styled.div`
   width: 90%;
   margin-left: 10px;
   margin-right: 10px;
+
+  @media (max-width: 450px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
 `
 
 const EmptyMessage = styled.h1`
@@ -25,7 +30,13 @@ const HomeBg = styled.section`
   align-items: center;
   background-color: #010048;
   height: 87.3%;
-  min-height: 500px;
+  @media (max-width: 450px) {
+    height: fit-content;
+  }
+
+  @media (max-width: 800px) {
+    min-height: 95vh;
+  }
 `
 
 const HomeContainer = styled.div`
@@ -38,6 +49,17 @@ const HomeContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  height: fit-content;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  @media (max-width: 450px) {
+    height: fit-content;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 `
 
 export default function Home(props) {

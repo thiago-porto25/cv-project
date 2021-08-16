@@ -59,8 +59,10 @@ export const Text = styled.p`
   font-size: 30px;
   font-weight: bold;
   margin-left: 20px;
+  margin-top: 40px;
   pointer-events: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+  @media (max-width: 500px) {
+    font-size: 25px;
+  }
 `
