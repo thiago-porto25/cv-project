@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Header, Footer, CvItem } from '../components'
+import { Header, Footer, CvItem, EmptyCvItem } from '../components'
 import styled from 'styled-components'
 import DataContext from '../context/DataContext'
 
@@ -77,6 +77,22 @@ export default function Home(props) {
                   }}
                 />
               ))}
+            {data && data.length === 1 ? (
+              <>
+                <EmptyCvItem />
+                <EmptyCvItem />
+                <EmptyCvItem />
+              </>
+            ) : data.length === 2 ? (
+              <>
+                <EmptyCvItem />
+                <EmptyCvItem />
+              </>
+            ) : data.length === 3 ? (
+              <>
+                <EmptyCvItem />
+              </>
+            ) : null}
           </CvsContainer>
         </HomeContainer>
       </HomeBg>
