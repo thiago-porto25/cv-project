@@ -83,12 +83,12 @@ export default function Home(props) {
                 <EmptyCvItem />
                 <EmptyCvItem />
               </>
-            ) : data.length === 2 ? (
+            ) : data && data.length === 2 ? (
               <>
                 <EmptyCvItem />
                 <EmptyCvItem />
               </>
-            ) : data.length === 3 ? (
+            ) : data && data.length === 3 ? (
               <>
                 <EmptyCvItem />
               </>

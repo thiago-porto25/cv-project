@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { jsPDF } from 'jspdf'
+import { toPng } from 'html-to-image'
 import { Header, Footer, DocPreview } from '../components'
 import DataContext from '../context/DataContext'
 
@@ -53,6 +55,29 @@ const NoCv = styled.h1``
 export default function Preview(props) {
   const { setData, data, currentCvIndex } = useContext(DataContext)
 
+  const createPdfFile = () => {
+    const myCv = document.querySelector('.myCv')
+    const myEditButtons = document.querySelectorAll('.fa-edit')
+
+    myCv.style.paddingLeft = '20px'
+    myCv.style.paddingRight = '20px'
+    myEditButtons.forEach((item) => (item.style.color = 'transparent'))
+
+    toPng(myCv, { quality: 0.2 }).then(function (dataUrl) {
+      let link = document.createElement('a')
+      link.download = 'my-image-name.jpeg'
+      const pdf = new jsPDF()
+      const imgProps = pdf.getImageProperties(dataUrl)
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+      pdf.save('CV.pdf')
+      myCv.style.paddingLeft = ''
+      myCv.style.paddingRight = ''
+      myEditButtons.forEach((item) => (item.style.color = '#03002a'))
+    })
+  }
+
   return (
     <>
       <Header {...props} />
@@ -60,6 +85,7 @@ export default function Preview(props) {
         <Container>
           {props.currentCv ? (
             <DocPreview
+              className="myCv"
               currentCvIndex={currentCvIndex}
               currentCv={props.currentCv}
               setCurrentCv={props.setCurrentCv}
@@ -69,7 +95,9 @@ export default function Preview(props) {
           ) : (
             <NoCv>You must have a CV to be able to view it</NoCv>
           )}
-          <DownloadButton>Download as PDF</DownloadButton>
+          <DownloadButton onClick={createPdfFile}>
+            Download as PDF
+          </DownloadButton>
         </Container>
       </PreviewBg>
       <Footer />

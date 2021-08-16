@@ -52,7 +52,7 @@ export default function DocPreview(props) {
   }, [])
 
   return (
-    <Container>
+    <Container className={props.className}>
       <InfoFrame>
         {isEditingInfo ? (
           <GeneralInfo
