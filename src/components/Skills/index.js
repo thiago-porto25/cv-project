@@ -18,7 +18,7 @@ import {
 
 export default function Skills(props) {
   const { setCurrentCvIndex } = useContext(DataContext)
-  const [setIsLoading] = props
+  const { setIsLoading } = props
   const [newSkill, setNewSkill] = useState('')
   const [skillsList, setSkillsList] = useState([])
 
