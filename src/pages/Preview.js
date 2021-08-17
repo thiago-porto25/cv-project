@@ -60,6 +60,11 @@ const NoCv = styled.h1`
   padding: 20px 20px;
 `
 
+const RedText = styled.p`
+  color: red;
+  margin-bottom: 40px;
+`
+
 export default function Preview(props) {
   const { setData, data, currentCvIndex } = useContext(DataContext)
   const [isEditingInfo, setIsEditingInfo] = useState(false)
@@ -74,16 +79,31 @@ export default function Preview(props) {
 
     myCv.style.paddingLeft = '20px'
     myCv.style.paddingRight = '20px'
+
     myEditButtons.forEach((item) => (item.style.color = 'transparent'))
 
-    toPng(myCv, { quality: 0.2 }).then(function (dataUrl) {
+    toPng(myCv, { quality: 0.95 }).then((dataUrl) => {
       let link = document.createElement('a')
-      link.download = 'my-image-name.jpeg'
+      link.download = 'my-image-name.png'
       const pdf = new jsPDF()
+      let position = 0
       const imgProps = pdf.getImageProperties(dataUrl)
       const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
-      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+      let heightLeft = pdfHeight
+
+      pdf.addImage(dataUrl, 'PNG', 0, position, pdfWidth, pdfHeight)
+      heightLeft -= pageHeight
+      console.log(heightLeft)
+
+      while (heightLeft >= 0) {
+        position = heightLeft - pdfHeight
+        pdf.addPage()
+        pdf.addImage(dataUrl, 'PNG', 0, position, pdfWidth, pdfHeight)
+        heightLeft -= pageHeight
+      }
+
       pdf.save('CV.pdf')
       myCv.style.paddingLeft = ''
       myCv.style.paddingRight = ''
@@ -98,40 +118,39 @@ export default function Preview(props) {
       <PreviewBg>
         <Container>
           {props.currentCv ? (
-            <>
-              <DocPreview
-                className="myCv"
-                currentCvIndex={currentCvIndex}
-                currentCv={props.currentCv}
-                setCurrentCv={props.setCurrentCv}
-                data={data}
-                setData={setData}
-                isEditingEduc={isEditingEduc}
-                isEditingExp={isEditingExp}
-                isEditingInfo={isEditingInfo}
-                isEditingSkills={isEditingSkills}
-                setIsEditingEduc={setIsEditingEduc}
-                setIsEditingExp={setIsEditingExp}
-                setIsEditingInfo={setIsEditingInfo}
-                setIsEditingSkills={setIsEditingSkills}
-              />
-              <DownloadButton
-                disabled={
-                  !isEditingEduc &&
-                  !isEditingExp &&
-                  !isEditingInfo &&
-                  !isEditingSkills
-                    ? false
-                    : true
-                }
-                onClick={createPdfFile}
-              >
-                Download as PDF
-              </DownloadButton>
-            </>
+            <DocPreview
+              className="myCv"
+              currentCvIndex={currentCvIndex}
+              currentCv={props.currentCv}
+              setCurrentCv={props.setCurrentCv}
+              data={data}
+              setData={setData}
+              isEditingEduc={isEditingEduc}
+              isEditingExp={isEditingExp}
+              isEditingInfo={isEditingInfo}
+              isEditingSkills={isEditingSkills}
+              setIsEditingEduc={setIsEditingEduc}
+              setIsEditingExp={setIsEditingExp}
+              setIsEditingInfo={setIsEditingInfo}
+              setIsEditingSkills={setIsEditingSkills}
+            />
           ) : (
             <NoCv>You must have a CV to be able to view it.</NoCv>
           )}
+          <DownloadButton
+            disabled={
+              !isEditingEduc &&
+              !isEditingExp &&
+              !isEditingInfo &&
+              !isEditingSkills
+                ? false
+                : true
+            }
+            onClick={createPdfFile}
+          >
+            Download as PDF
+          </DownloadButton>
+          <RedText>Works better in a Desktop!</RedText>
         </Container>
       </PreviewBg>
       <Footer />

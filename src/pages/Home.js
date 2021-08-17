@@ -18,12 +18,6 @@ const CvsContainer = styled.div`
   }
 `
 
-const EmptyMessage = styled.h1`
-  color: black;
-  margin: 0 auto;
-  margin-top: 100px;
-`
-
 const HomeBg = styled.section`
   display: flex;
   justify-content: center;
@@ -77,11 +71,6 @@ export default function Home(props) {
       <Header {...props} data={data} />
       <HomeBg>
         <HomeContainer>
-          {!data && (
-            <EmptyMessage>
-              It seems you have no CVs. Create you first one!
-            </EmptyMessage>
-          )}
           <CvsContainer>
             {data &&
               data.map((item, i) => (
@@ -99,7 +88,14 @@ export default function Home(props) {
                   }}
                 />
               ))}
-            {data && data.length === 1 ? (
+            {!data || (data && data.length === 0) ? (
+              <>
+                <EmptyCvItem />
+                <EmptyCvItem />
+                <EmptyCvItem />
+                <EmptyCvItem />
+              </>
+            ) : data && data.length === 1 ? (
               <>
                 <EmptyCvItem />
                 <EmptyCvItem />
