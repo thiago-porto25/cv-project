@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import DataContext from '../context/DataContext'
+import { LoadingModal } from '../components'
 import {
   Education,
   Experience,
@@ -36,6 +37,7 @@ const CreatingContainer = styled.div`
 
 export default function Creating(props) {
   const { setCurrentCv, setData, currentCv, data } = useContext(DataContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [inGeneralInfo, setInGeneralInfo] = useState(true)
   const [inEducation, setInEducation] = useState(false)
   const [inExperience, setInExperience] = useState(false)
@@ -56,6 +58,7 @@ export default function Creating(props) {
     <>
       <Header {...props} />
       <CreatingBg>
+        {isLoading && <LoadingModal />}
         <CreatingContainer>
           <ProgressBar progress={progress} />
           {inGeneralInfo && (
@@ -98,6 +101,7 @@ export default function Creating(props) {
               setInPreview={props.setInPreview}
               setProgress={setProgress}
               whichPage="creating"
+              setIsLoading={setIsLoading}
             />
           )}
         </CreatingContainer>

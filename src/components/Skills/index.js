@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react'
 import DataContext from '../../context/DataContext'
-import { LoadingModal } from '..'
 import {
   AddSkill,
   ButtonsContainer,
@@ -19,7 +18,7 @@ import {
 
 export default function Skills(props) {
   const { setCurrentCvIndex } = useContext(DataContext)
-  const [isLoading, setIsLoading] = useState(false)
+  const [setIsLoading] = props
   const [newSkill, setNewSkill] = useState('')
   const [skillsList, setSkillsList] = useState([])
 
@@ -62,7 +61,6 @@ export default function Skills(props) {
 
   return (
     <>
-      {isLoading && <LoadingModal />}
       <Container>
         {props.whichPage === 'creating' && <Title>Skills</Title>}
         <Form
